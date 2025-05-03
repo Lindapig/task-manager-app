@@ -1,15 +1,28 @@
-import { Text, View } from "react-native";
+// app/index.tsx
+import { View, FlatList, StyleSheet } from 'react-native';
+import { useState } from 'react';
+import TaskCard from '../components/TaskCard';
+import { Task } from '../types/Task';
+import { mockTasks } from '../constants/mockTasks';
 
-export default function Index() {
+export default function HomeScreen() {
+  const [tasks, setTasks] = useState<Task[]>(mockTasks);
+
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+    <View style={styles.container}>
+      <FlatList
+        data={tasks}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <TaskCard task={item} />}
+      />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: '#fff',
+  },
+});
