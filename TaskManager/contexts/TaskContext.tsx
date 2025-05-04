@@ -6,6 +6,7 @@ interface TaskContextType {
     tasks: Task[];
     addTask: (task: Task) => void;
     editTask: (updatedTask: Task) => void;
+    deleteTask: (id: string) => void;
     // add editTask, deleteTask, toggleStatus here if needed
 }
 
@@ -26,8 +27,13 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
         );
     };
 
+    // Function to delete a task
+    const deleteTask = (id: string) => {
+        setTasks((prev) => prev.filter((task) => task.id !== id));
+    };
+
     return (
-        <TaskContext.Provider value={{ tasks, addTask, editTask }}>
+        <TaskContext.Provider value={{ tasks, addTask, editTask, deleteTask }}>
             {children}
         </TaskContext.Provider>
     );
