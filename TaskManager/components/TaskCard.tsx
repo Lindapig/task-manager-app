@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet } from 'react-native';
 import { Task } from '../types/Task';
+import { Link } from 'expo-router';
 
 interface Props {
     task: Task;
@@ -19,6 +20,12 @@ export default function TaskCard({ task }: Props) {
             <Text style={styles.status}>
                 {task.status === 'completed' ? '✅ Completed' : '🕒 Pending'}
             </Text>
+            <Link
+                href={{ pathname: '/edit/[id]', params: { id: task.id } } as const}
+                asChild
+            >
+                <Text style={styles.editLink}>✏️ Edit</Text>
+            </Link>
         </View>
     );
 }
@@ -38,5 +45,10 @@ const styles = StyleSheet.create({
         marginTop: 4,
         fontStyle: 'italic',
         color: '#555',
+    },
+    editLink: {
+        color: '#007bff',
+        marginTop: 8,
+        fontWeight: '500',
     },
 });
