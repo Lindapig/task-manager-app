@@ -26,3 +26,37 @@ A simple React Native app built with Expo and TypeScript that lets users manage 
 
 ## 📁 Project Structure
 
+/app
+├── index.tsx # Home screen (task list)
+├── create.tsx # Create task screen
+├── edit/[id].tsx # Edit task screen
+/components
+├── TaskCard.tsx # Task display card
+├── AddButton.tsx # Reusable add button
+├── BackButton.tsx # Back navigation
+/contexts
+└── TaskContext.tsx # Context to store task list
+/constants
+└── mockTasks.ts # Initial mock data
+/types
+└── Task.ts # Type definition for Task
+
+
+---
+
+## ✅ Setup & Run
+
+1. Clone the repo:
+   ```bash
+   git clone https://github.com/Lindapig/task-manager-app.git
+   cd task-manager-app
+
+2. Install dependencies
+   ```bash
+   npm install
+
+3. Start the development server:
+   ```bash
+   npx expo start
+   
+4. Scan the QR code using Expo Go on your iOS/Android device or run on a simulator.
