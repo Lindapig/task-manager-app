@@ -25,7 +25,7 @@ A simple React Native app built with Expo and TypeScript that lets users manage 
 ---
 
 ## 📁 Project Structure
-
+```
 task-manager-app/
 ├── app/
 │   ├── index.tsx           # Home screen (task list)
