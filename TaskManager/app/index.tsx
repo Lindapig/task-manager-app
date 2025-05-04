@@ -1,15 +1,18 @@
-// app/index.tsx
-import { View, FlatList, StyleSheet } from 'react-native';
-import { useState } from 'react';
+import { View, FlatList, StyleSheet, Text, Pressable } from 'react-native';
+import { Link } from 'expo-router';
 import TaskCard from '../components/TaskCard';
-import { Task } from '../types/Task';
-import { mockTasks } from '../constants/mockTasks';
+import { useTaskContext } from '../contexts/TaskContext';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import AddButton from '../components/AddButton';
 
 export default function HomeScreen() {
-  const [tasks, setTasks] = useState<Task[]>(mockTasks);
+  const { tasks } = useTaskContext();
+  const insets = useSafeAreaInsets();
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { paddingTop: insets.top + 16 }]}>
+      <AddButton />
+
       <FlatList
         data={tasks}
         keyExtractor={(item) => item.id}
@@ -22,7 +25,20 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    paddingHorizontal: 16,
     backgroundColor: '#fff',
+  },
+  addButton: {
+    backgroundColor: '#007AFF',
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  addButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });

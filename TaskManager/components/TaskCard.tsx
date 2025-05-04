@@ -5,6 +5,12 @@ interface Props {
     task: Task;
 }
 
+/**
+ * TaskCard component displays a single task's information including
+ * title, description, and completion status.
+ *
+ * @param task - The task object containing title, description, and status.
+ */
 export default function TaskCard({ task }: Props) {
     return (
         <View style={styles.card}>
