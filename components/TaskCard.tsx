@@ -29,9 +29,9 @@ export default function TaskCard({ task }: Props) {
         <View style={styles.card}>
             <Text style={styles.title}>{task.title}</Text>
             <Text>{task.description}</Text>
-            {/* <Text style={styles.status}>
+            <Text style={styles.status}>
                 {task.status === 'completed' ? '✅ Completed' : '🕒 Pending'}
-            </Text> */}
+            </Text>
 
             <Link
                 href={{ pathname: '/edit/[id]', params: { id: task.id } } as const}
