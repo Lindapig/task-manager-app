@@ -1,13 +1,13 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
-import { Task } from '../types/Task';
+import { createContext, ReactNode, useContext, useState } from 'react';
 import { mockTasks } from '../constants/mockTasks';
+import { Task } from '../types/Task';
 
 interface TaskContextType {
     tasks: Task[];
     addTask: (task: Task) => void;
     editTask: (updatedTask: Task) => void;
     deleteTask: (id: string) => void;
-    // add editTask, deleteTask, toggleStatus here if needed
+    toggleStatus: (id: string) => void;
 }
 
 const TaskContext = createContext<TaskContextType | undefined>(undefined);
@@ -32,8 +32,22 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
         setTasks((prev) => prev.filter((task) => task.id !== id));
     };
 
+    // Function to toggle task status between 'pending' and 'completed'
+    const toggleStatus = (id: string) => {
+        setTasks((prev) =>
+            prev.map((task) =>
+                task.id === id
+                    ? {
+                        ...task,
+                        status: task.status === 'pending' ? 'completed' : 'pending',
+                    }
+                    : task
+            )
+        );
+    };
+
     return (
-        <TaskContext.Provider value={{ tasks, addTask, editTask, deleteTask }}>
+        <TaskContext.Provider value={{ tasks, addTask, editTask, deleteTask, toggleStatus }}>
             {children}
         </TaskContext.Provider>
     );

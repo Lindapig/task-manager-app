@@ -1,7 +1,7 @@
-import { View, Text, StyleSheet, Button, Alert } from 'react-native';
-import { Task } from '../types/Task';
 import { Link } from 'expo-router';
+import { Alert, StyleSheet, Text, View } from 'react-native';
 import { useTaskContext } from '../contexts/TaskContext';
+import { Task } from '../types/Task';
 
 interface Props {
     task: Task;
@@ -12,7 +12,7 @@ interface Props {
  * title, description, status, and provides options to edit or delete the task.
  */
 export default function TaskCard({ task }: Props) {
-    const { deleteTask } = useTaskContext();
+    const { deleteTask, toggleStatus } = useTaskContext();
 
     const handleDelete = () => {
         Alert.alert(
@@ -29,9 +29,9 @@ export default function TaskCard({ task }: Props) {
         <View style={styles.card}>
             <Text style={styles.title}>{task.title}</Text>
             <Text>{task.description}</Text>
-            <Text style={styles.status}>
+            {/* <Text style={styles.status}>
                 {task.status === 'completed' ? '✅ Completed' : '🕒 Pending'}
-            </Text>
+            </Text> */}
 
             <Link
                 href={{ pathname: '/edit/[id]', params: { id: task.id } } as const}
@@ -45,7 +45,15 @@ export default function TaskCard({ task }: Props) {
             >
                 🗑️ Delete
             </Text>
-
+            <Text
+                style={[
+                    styles.actionButton,
+                    task.status === 'completed' ? styles.pendingButton : styles.completeButton,
+                ]}
+                onPress={() => toggleStatus(task.id)}
+            >
+                {task.status === 'completed' ? '↩️ Mark as Pending' : '✅ Mark as Completed'}
+            </Text>
 
             {/* <Button title="Delete" color="red" onPress={handleDelete} /> */}
         </View>
@@ -90,10 +98,16 @@ const styles = StyleSheet.create({
     },
 
     editButton: {
-        backgroundColor: '#007bff',
+        backgroundColor: '#007bff', // blue
     },
 
     deleteButton: {
-        backgroundColor: '#dc3545',
+        backgroundColor: '#dc3545', // red
+    },
+    completeButton: {
+        backgroundColor: '#28a745', // green
+    },
+    pendingButton: {
+        backgroundColor: '#ffc107', // yellow
     },
 });
