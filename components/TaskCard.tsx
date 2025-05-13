@@ -27,7 +27,12 @@ export default function TaskCard({ task }: Props) {
 
     return (
         <View style={styles.card}>
-            <Text style={styles.title}>{task.title}</Text>
+            <Link
+                href={{ pathname: '/detail/[id]', params: { id: task.id } } as const}
+                asChild
+            >
+                <Text style={styles.title}>{task.title}</Text>
+            </Link>
             <Text>{task.description}</Text>
             <Text style={styles.status}>
                 {task.status === 'completed' ? '✅ Completed' : '🕒 Pending'}
