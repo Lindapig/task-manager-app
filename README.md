@@ -28,19 +28,21 @@ A simple React Native app built with Expo and TypeScript that lets users manage 
 ```
 task-manager-app/
 ├── app/
-│   ├── index.tsx           # Home screen (task list)
-│   ├── create.tsx          # Create task screen
-│   └── edit/[id].tsx       # Edit task screen
+│ ├── index.tsx # Home screen (task list with search)
+│ ├── create.tsx # Create task screen
+│ ├── edit/[id].tsx # Edit task screen
+│ └── detail/[id].tsx # Task detail screen
 ├── components/
-│   ├── TaskCard.tsx        # Task display card
-│   ├── AddButton.tsx       # Reusable add button
-│   └── BackButton.tsx      # Back navigation
+│ ├── TaskCard.tsx # Task display card with actions
+│ ├── AddButton.tsx # Reusable add button
+│ └── BackButton.tsx # Back navigation button
 ├── contexts/
-│   └── TaskContext.tsx     # Context to store task list
+│ └── TaskContext.tsx # Context to manage global task state
 ├── constants/
-│   └── mockTasks.ts        # Initial mock data
+│ └── mockTasks.ts # Initial hardcoded task data
 ├── types/
-│   └── Task.ts             # Type definition for Task
+│ └── Task.ts # TypeScript interface for Task
+├── assets/ # Static assets (images, fonts, etc.)
 ├── package.json
 ├── tsconfig.json
 ├── README.md
